@@ -26,6 +26,8 @@ looker.plugins.visualizations.add({
         }
 
         const firstRowFields = qFields.dimension_like.concat(qFields.measure_like);
+        
+
         for(field in firstRowFields) {
             const columnIndex = parseInt(field) + 1;
             const columnRef = `column_${columnIndex}`;
@@ -33,10 +35,13 @@ looker.plugins.visualizations.add({
             const columnRexExpNumeric = new RegExp("{{( *)" + columnRef + "( *)}}", "g");
             const columnRexExpByRef = new RegExp("{{( *)" + firstRowFields[field].name + "( *)}}", "g");
             const columnValue = LookerCharts.Utils.filterableValueForCell(firstRow[firstRowFields[field].name]);
+            const labelRef = new RegExp("{{( *)" + firstRowFields[field].name + ".label( *)}}", "g");
+            const labelValue = qFields.measure[columnIndex].label_short;
             
             htmlTemplate = htmlTemplate.replace(columnRexExpSingleVal, columnValue);
+            htmlTemplate = htmlTemplate.replace(columnRexExpSingleVal, columnValue);
             htmlTemplate = htmlTemplate.replace(columnRexExpNumeric, columnValue);
-            htmlTemplate = htmlTemplate.replace(columnRexExpByRef, columnValue);
+            htmlTemplate = htmlTemplate.replace(labelRef, labelValue);
         }
 
         element.innerHTML = htmlTemplate;
