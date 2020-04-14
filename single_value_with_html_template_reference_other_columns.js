@@ -36,7 +36,7 @@ looker.plugins.visualizations.add({
             const columnRexExpByRef = new RegExp("{{( *)" + firstRowFields[field].name + "( *)}}", "g");
             const columnValue = LookerCharts.Utils.filterableValueForCell(firstRow[firstRowFields[field].name]);
             const labelRef = new RegExp("{{( *)" + firstRowFields[field].name + ".label( *)}}", "g");
-            const labelValue = qFields.measure[columnIndex].label_short;
+            const labelValue = qFields.measures[columnIndex].label_short;
             
             htmlTemplate = htmlTemplate.replace(columnRexExpSingleVal, columnValue);
             htmlTemplate = htmlTemplate.replace(columnRexExpSingleVal, columnValue);
